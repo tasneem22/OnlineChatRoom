@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1051125975253",
+    "project_id": "authentication-page-7b715",
+    "storage_bucket": "authentication-page-7b715.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051125975253:android:db0a2120c34ff4b5afba5c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051125975253-c07f8uks3b9mti1h8opta3g0frfjgq2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaWzDbf6U26Cf4iKUHjBxKLTRs-xlrPVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051125975253-c07f8uks3b9mti1h8opta3g0frfjgq2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
