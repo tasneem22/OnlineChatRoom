@@ -38,61 +38,83 @@ class _RegisterState extends State<Register> {
         ],
 
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 50.0),
-        child: Form(
+      body: SafeArea(
+          child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+    child: Form(
           key: _formKey,
           child: Column(
+            mainAxisSize: MainAxisSize.min ,
             children: <Widget>[
-              // EMAIL
-              SizedBox(height: 20.0),
-              TextFormField(
-                validator: (val)=>val.isEmpty? 'Enter an email' : null,
-                onChanged: (val){
-                  setState(() => email = val);
-                },
-              ),
-              // PASSWORD
-              SizedBox(height: 20.0),
-              TextFormField(
-                validator: (val)=>val.length<6? 'Password should be at least 8 characters' : null,
-
-                obscureText: true,
-                onChanged: (val){
-                  setState(() => password = val);
-                },
-              ),
-              SizedBox(height: 20.0,),
-              RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'REGISTER if you want:P',
-                    style: TextStyle(color: Colors.white),
+              Expanded(
+                child: Column(
+                  children:[
+                    Expanded(
+                      child: TextFormField(
+                      validator: (val)=>val.isEmpty? 'Enter an email' : null,
+                      onChanged: (val){
+                        setState(() => email = val);
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                      ),
                   ),
-                  onPressed:()async{
-                     if(_formKey.currentState.validate()){
-                       dynamic result = await _authService.Register(email, password);
+                    ),
 
-                       print('this is the resuelt ');
-                       print(result);
-                       if(result == null){
-                         setState(()=>error='please supply a valid email');
-                       }
+                    Expanded(
+                      child: TextFormField(
+                        validator: (val)=>val.length<6? 'Password should be at least 8 characters' : null,
 
-                     }else{
+                        obscureText: true,
+                        onChanged: (val){
+                          setState(() => password = val);
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Password ',
+                        ),
+                      ),
+                    ),
+            ]
+                ),
+              ),
 
-                     }
-                  } ),
-              SizedBox(height: 20.0,),
-              Text(
-                error,
-                style: TextStyle(color: Colors.red , fontSize: 14.0),
+
+              Expanded(
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+
+                  child: RaisedButton(
+                      color: Colors.blue,
+                      child: Text(
+                        'REGISTER if you want:P',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed:()async{
+                         if(_formKey.currentState.validate()){
+                           dynamic result = await _authService.Register(email, password);
+
+                           print('this is the result');
+                           print(result);
+                           if(result == null){
+                             setState(()=>error='Email is already used');
+                           }
+
+                         }
+                      } ),
+                ),
+              ),
+
+              Expanded(
+                child: Text(
+                  error,
+                  style: TextStyle(color: Colors.red , fontSize: 14.0),
+                ),
               )
-
             ],
           ),
         ),
+      )
       ),
-    );;
+    );
   }
 }

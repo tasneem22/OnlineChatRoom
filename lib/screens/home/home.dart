@@ -26,14 +26,14 @@ class home extends StatelessWidget {
             FlatButton.icon(
                 icon: Icon(Icons.person),
                 onPressed: ()async {
-                  await _auth.signout();
+                  await _auth.signOut();
                 },
                label: Text('logout'),
 
             )
           ],
         ),
-        body: Chat(userid: user.uid)
+        body: Chat(userId: user.uid)
 
 
       ),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/screens/models/user.dart';
 import 'package:flutter_app/services/database.dart';
 
@@ -25,24 +26,26 @@ class AuthService{
     }
   }
 
-  Future Register(String email, String password) async{
-    try{
-      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      FirebaseUser user=result.user;
+  Future Register(String email, String password) async {
+    try {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      FirebaseUser user = result.user;
 
       await DatabaseService(uid: user.uid).update_user_data(email, password);
 
       return userFromFirebaseUser(user);
-
-    }catch(e){
-      print(e.toString());
-
-      return null;
+    } catch (signUpError) {
+      if (signUpError is PlatformException) {
+        if (signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+          //
+        }
+      }
     }
   }
 
 
-  Future signout() async{
+  Future signOut() async{
     try{
       return  await _auth.signOut();
     }catch(e){
